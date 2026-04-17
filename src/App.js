@@ -36,18 +36,34 @@ function Accordion({ data }) {
         <Item
           title={el.title}
           num={i}
-          text={el.text}
           key={el.id}
           id={el.id}
           curOpen={curOpen}
           onCurOpen={setCurOpen}
-        />
+        >
+          {el.text}
+        </Item>
       ))}
+      <Item
+        title="Test 1"
+        num={22}
+        key="test 1"
+        id="test 1"
+        curOpen={curOpen}
+        onCurOpen={setCurOpen}
+      >
+        <p>Allows React developers to:</p>
+        <ul>
+          <li>Break up UI into components</li>
+          <li>Make components reusable</li>
+          <li>Place state efficiently</li>
+        </ul>
+      </Item>
     </div>
   );
 }
 
-function Item({ title, num, text, id, curOpen, onCurOpen }) {
+function Item({ title, num, text, id, curOpen, onCurOpen, children }) {
   const isOpen = id === curOpen;
   function handleToggle() {
     onCurOpen(id === curOpen ? null : id);
@@ -57,7 +73,7 @@ function Item({ title, num, text, id, curOpen, onCurOpen }) {
       <p className="number">{num < 9 ? `0${num + 1}` : num + 1}</p>
       <p className="title">{title}</p>
       <p className="icon">{isOpen ? "-" : "+"}</p>
-      {isOpen ? <div className="content-box">{text}</div> : ""}
+      {isOpen ? <div className="content-box">{children}</div> : ""}
     </div>
   );
 }
